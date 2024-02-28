@@ -15,7 +15,6 @@ type TaskInterface = {
 export default function KanbanPage() {
 
     const { loading, error, data } = useQuery(TASKS);
-  
     const [TodoTask, setTodoTasks] = useState<TaskInterface[]>([]);
     const [DoneTasks, setDoneTasks] = useState<TaskInterface[]>([]);
     const [InProgressTasks, setInProgressTasks] = useState<TaskInterface[]>([]);
@@ -52,9 +51,15 @@ export default function KanbanPage() {
         localStorage.setItem('inProgressTasks', JSON.stringify([]));
         setInProgressTasks([]);
       }
+
+      const storedId = localStorage.getItem('ultimoId');
+      if (!storedId){
+          localStorage.setItem('ultimoId', '10');
+      }
     }, [data]); 
 
     const handleDragEnd = async (result: any) => {
+        console.log(TodoTask, DoneTasks, InProgressTasks)
         const { destination, source, draggableId } = result;
         console.log(source, destination, draggableId);
         if (!destination || source.droppableId === destination.droppableId){
