@@ -7,7 +7,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {todoDataMock, doneDataMock, InProgressDataMock} from './data'
 import AddTaskModal from "./components/addTaskModal";
 import EditTaskModal from "./components/editTaskModal";
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
+import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 interface TaskItem {
   key: string;
@@ -100,12 +102,10 @@ export default function App() {
                   <View>
                     <Text style={[styles.text]}>
                     {item.content}
-                    <TouchableOpacity style={{...styles.button}} onPress={() => {
+                    <TouchableOpacity style={{...styles.editButton}} onPress={() => {
                                                   setIsEditModalVisible(true);
                                                   setTaskClicked(item);}}>
-                        <Text style={styles.text}>
-                            Edit
-                        </Text>
+                        <FontAwesomeIcon icon={ faPenSquare } />
                   </TouchableOpacity>
                   </Text>
                   </View>
@@ -168,10 +168,8 @@ export default function App() {
                 <Text style={styles.title}>
                   To do
                 </Text>
-                  <TouchableOpacity style={{...styles.button}} onPress={() => { setIsAddModalVisible(true); setColumn('todo');}}>
-                        <Text style={styles.text}>
-                          Add Task
-                        </Text>
+                  <TouchableOpacity style={{...styles.editButton}} onPress={() => { setIsAddModalVisible(true); setColumn('todo');}}>
+                      <FontAwesomeIcon icon={ faPlus } />
                   </TouchableOpacity>
               </View>
             </View>
@@ -188,8 +186,8 @@ export default function App() {
                 <Text style={styles.title}>
                   Done
                 </Text>
-                <TouchableOpacity style={{...styles.button}} onPress={() => { setIsAddModalVisible(true); setColumn('done');}}>
-                        <Text style={styles.text}>Add Task</Text>
+                <TouchableOpacity style={{...styles.editButton}} onPress={() => { setIsAddModalVisible(true); setColumn('done');}}>
+                        <FontAwesomeIcon icon={ faPlus } />
                   </TouchableOpacity>
               </View>
             </View>
@@ -206,8 +204,8 @@ export default function App() {
                 <Text style={styles.title}>
                   In Progress
                 </Text>
-                <TouchableOpacity style={{...styles.button}} onPress={() => { setIsAddModalVisible(true); setColumn('in progress');}}>
-                        <Text style={styles.text}>Add Task</Text>
+                <TouchableOpacity style={{...styles.editButton}} onPress={() => { setIsAddModalVisible(true); setColumn('in progress');}}>
+                      <FontAwesomeIcon icon={ faPlus } />
                   </TouchableOpacity>
               </View>
             </View>
@@ -227,6 +225,11 @@ export default function App() {
 const styles = StyleSheet.create({
   button: {
     backgroundColor: '#2d3748',
+    padding: 10,
+    borderRadius: 5,
+  },
+
+  editButton: {
     padding: 10,
     borderRadius: 5,
   },

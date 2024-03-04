@@ -36,8 +36,9 @@ const EditTaskModal = ({ isVisible, onClose, item, todo, done, inProgress }: { i
         }
 
         setTaskName('');
-        onClose();
         setSelectedButton('');
+        onClose();
+        
     
     }
     
@@ -166,7 +167,7 @@ const EditTaskModal = ({ isVisible, onClose, item, todo, done, inProgress }: { i
                 <Pressable style={[styles.button, styles.buttonClose]} onPress={handleSave}>
                     <Text style={styles.textStyle}>Confirm</Text>
                 </Pressable>
-                <Pressable style={[styles.button, styles.buttonClose]} onPress={onClose}>
+                <Pressable style={[styles.button, styles.buttonClose]} onPress={() => { setSelectedButton(''); onClose(); }}>
                     <Text style={styles.textStyle}>Cancel</Text>
                 </Pressable>
 
